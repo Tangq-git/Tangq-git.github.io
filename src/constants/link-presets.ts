@@ -48,9 +48,9 @@ export const LinkPresets: { [key in LinkPreset]: NavbarLink } = {
     },
     [LinkPreset.Anime]: {
         name: i18n(I18nKey.anime),
-        url: "/anime/",
+        url: "/movies/",
         icon: "material-symbols:movie",
-        description: "A list of anime I have watched.",
+        description: "我看过的和想看的电影。",
     },
     [LinkPreset.Friends]: {
         name: i18n(I18nKey.friends),

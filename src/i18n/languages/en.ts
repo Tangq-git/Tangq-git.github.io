@@ -173,7 +173,7 @@ export const en: Translation = {
     [Key.albumsPhotosCount]: "photos",
 
     // Anime Page
-    [Key.anime]: "Anime",
+    [Key.anime]: "Movies",
     [Key.animeTitle]: "My Anime List",
     [Key.animeSubtitle]: "Record my anime journey",
     [Key.animeList]: "Anime List",
@@ -188,6 +188,16 @@ export const en: Translation = {
     [Key.animeStudio]: "Studio",
     [Key.animeEmpty]: "No anime data",
     [Key.animeEmptyBangumi]: "Please check Bangumi configuration or network connection",
+
+    // 展览页卡片
+    [Key.exhibitionTitle]: "Exhibition",
+    [Key.exhibitionSubtitle]: "My Projects",
+    [Key.exhibitionProjectsDesc]: "My development project portfolio",
+    [Key.exhibitionSkillsDesc]: "My technical skills and expertise",
+    [Key.exhibitionTimelineDesc]: "My growth journey and important milestones",
+    [Key.exhibitionDiaryDesc]: "Share life anytime, anywhere",
+    [Key.exhibitionAlbumsDesc]: "Record beautiful moments in life",
+    [Key.exhibitionAnimeDesc]: "A list of anime I have watched",
 
     // Friends Page
     [Key.friends]: "Friends",

@@ -173,7 +173,7 @@ export const ja: Translation = {
     [Key.albumsPhotosCount]: "写真",
 
     // アニメページ
-    [Key.anime]: "アニメ",
+    [Key.anime]: "映画",
     [Key.animeTitle]: "私のアニメリスト",
     [Key.animeSubtitle]: "私の二次元の旅を記録する",
     [Key.animeList]: "アニメリスト",

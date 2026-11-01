@@ -78,7 +78,28 @@ const specCollection = defineCollection({
     }),
 });
 
+const moviesCollection = defineCollection({
+    // 加载器：构建时扫描 src/content/movies 下所有子文件夹里的 note.md / note.mdx
+    // 每个文件变成一个 entry，entry.id = 相对路径去扩展名（如 "30292777/note"）
+    loader: glob({ pattern: '**/note.{md,mdx}', base: "./src/content/movies" }),
+    // 校验规则：每个 note.md 的 frontmatter 必须符合这个结构，否则构建报错
+    schema: z.object({
+        title: z.coerce.string(),                        // 片名（必填）
+        originalTitle: z.string().optional(),            // 原名（可空）
+        year: z.coerce.number(),                         // 年份；coerce 容忍 "2019" 这种字符串，自动转数字
+        director: z.string(),                            // 导演
+        doubanId: z.string(),                            // 豆瓣 ID（字符串防精度问题）
+        doubanRating: z.number().min(0).max(10),         // 豆瓣评分，限定 0-10
+        myRating: z.number().min(0).max(10).optional(),  // 我的评分（"想看"的片还没评分，所以可空）
+        status: z.enum(["watched", "planned"]),          // 状态枚举，写第三个值直接报错
+        watchDate: optionalDateSchema,                   // 观影日期，复用文件顶部现成的日期预处理
+        region: z.string().optional(),                   // 地区
+        tags: tagsSchema,                                // 标签，复用现成的标签解析（处理了字符串/数组两种写法）
+        poster: z.string(),                              // 海报路径（必填，海报墙没图还叫什么海报墙）
+    }),
+});
 export const collections = {
     posts: postsCollection,
     spec: specCollection,
+    movies: moviesCollection,
 };

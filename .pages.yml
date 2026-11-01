@@ -25,6 +25,11 @@ media:
     input: src/content/projects
     output: /src/content/projects
     categories: [image]
+  - name: movies
+    label: Movies Images
+    input: src/content/movies
+    output: /src/content/movies
+    categories: [image]
 
 
 # 内容管理配置
@@ -228,3 +233,27 @@ content:
       #- { name: title, label: Title, type: string, required: false }
       #- { name: description, label: Description, type: string, required: false }
       - { name: body, label: Body, type: rich-text }
+
+  # 观影（每部电影一个文件夹，内含 note.md + 海报）
+  - type: collection
+    name: movies
+    label: Movies
+    path: src/content/movies
+    # 支持按豆瓣 ID 建的子文件夹
+    subfolders: true
+    # 新建条目时生成 <豆瓣ID>/note.md（实际建议用 pnpm new-movie 创建，这里主要用来编辑）
+    filename: "{slug}/note.md"
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: originalTitle, label: Original Title, type: string, required: false }
+      - { name: year, label: Year, type: number }
+      - { name: director, label: Director, type: string }
+      - { name: doubanId, label: Douban ID, type: string }
+      - { name: doubanRating, label: Douban Rating, type: number, min: 0, max: 10 }
+      - { name: myRating, label: My Rating, type: number, min: 0, max: 10, required: false }
+      - { name: status, label: Status, type: select, options: {values: [watched, planned]}, default: planned }
+      - { name: watchDate, label: Watch Date, type: date, required: false }
+      - { name: region, label: Region, type: string, required: false }
+      - { name: tags, label: Tags, type: string, list: true, required: false }
+      - { name: poster, label: Poster, type: image, options: {media: movies} }
+      - { name: body, label: Review, type: rich-text, required: false }

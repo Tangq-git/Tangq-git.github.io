@@ -195,11 +195,6 @@ export type SiteConfig = {
     loadingOverlay?: LoadingOverlayConfig;
     // Favicon 配置
     favicon: Favicon[];
-    // bangumi 配置
-    bangumi?: {
-        // 用户 ID
-        userId?: string;
-    };
     // OpenGraph 配置
     generateOgImages: boolean;
 };

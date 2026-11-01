@@ -11,7 +11,8 @@
 		"build": "node scripts/generate-icons.js && node scripts/build-with-pagefind.cjs",
 		"preview": "astro preview",
 		"astro": "astro",
-		"new-post": "node scripts/new-post.js"
+		"new-post": "node scripts/new-post.js",
+		"new-movie": "node scripts/fetch-douban-movie.mjs"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.10",

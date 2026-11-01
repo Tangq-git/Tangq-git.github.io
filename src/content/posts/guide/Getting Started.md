@@ -3,7 +3,7 @@ title: Guide for Template - Getting Started
 published: 2001-10-02
 description: "How to use this blog template."
 cover: "./Cover - Getting Started.jpg"
-coverInContent: false
+coverInContent: true
 pinned: true
 tags: []
 category:

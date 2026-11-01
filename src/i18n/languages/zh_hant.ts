@@ -173,7 +173,7 @@ export const zh_hant: Translation = {
     [Key.albumsPhotosCount]: "張照片",
 
     // 番劇頁面
-    [Key.anime]: "追番",
+    [Key.anime]: "觀影",
     [Key.animeTitle]: "我的追番記錄",
     [Key.animeSubtitle]: "記錄我的二次元之旅",
     [Key.animeList]: "追番列表",

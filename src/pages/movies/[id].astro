@@ -1,0 +1,113 @@
+---
+export const prerender = true;
+
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ImageWrapper from "@components/common/imageWrapper.astro";
+import Markdown from "@components/common/markdown.astro";
+import Comment from "@components/comment.astro";
+import GridLayout from "@layouts/grid.astro";
+import BackwardButton from "@components/backwardButton.astro";
+import { formatDateToYYYYMMDD } from "@utils/date";
+
+// 构建时为每部电影生成一条静态路由 /movies/<文件夹名>/
+// 文件夹名就是豆瓣 ID，例如 /movies/30292777/
+export async function getStaticPaths() {
+    const movieEntries = await getCollection("movies");
+    return movieEntries.map((entry) => ({
+        params: { id: entry.id.split("/")[0] },
+        props: { entry },
+    }));
+}
+
+interface Props {
+    entry: CollectionEntry<"movies">;
+}
+
+const { entry } = Astro.props;
+// 把 note.md 的正文编译成可直接渲染的组件
+const { Content, headings } = await render(entry);
+
+const folder = entry.id.split("/")[0];
+const data = entry.data;
+const pageTitle = `${data.title} - 观影记录`;
+const isWatched = data.status === "watched";
+---
+
+<GridLayout title={pageTitle} description={data.title} headings={headings}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32 mb-4">
+        <div class="card-base z-10 px-9 py-6 relative w-full">
+            <BackwardButton currentPath={Astro.url.pathname} />
+
+            <!-- 头部：左边海报，右边元信息 -->
+            <div class="flex flex-col md:flex-row gap-8 mb-8 mt-2">
+                <div class="w-48 md:w-56 shrink-0 mx-auto md:mx-0">
+                    <ImageWrapper
+                        src={data.poster}
+                        basePath={`content/movies/${folder}`}
+                        alt={data.title}
+                        class="w-full aspect-[2/3] rounded-lg"
+                    />
+                </div>
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-black/90 dark:text-white/90 mb-1">{data.title}</h1>
+                    {data.originalTitle && (
+                        <p class="text-lg text-black/50 dark:text-white/50 mb-4">{data.originalTitle}</p>
+                    )}
+                    <!-- 元信息列表：左列字段名，右列值 -->
+                    <dl class="grid grid-cols-[5rem_1fr] gap-y-2 text-black/75 dark:text-white/75">
+                        <dt class="text-black/40 dark:text-white/40">年份</dt>
+                        <dd>{data.year}</dd>
+                        <dt class="text-black/40 dark:text-white/40">导演</dt>
+                        <dd>{data.director}</dd>
+                        {data.region && (
+                            <>
+                                <dt class="text-black/40 dark:text-white/40">地区</dt>
+                                <dd>{data.region}</dd>
+                            </>
+                        )}
+                        <dt class="text-black/40 dark:text-white/40">豆瓣评分</dt>
+                        <dd class="text-orange-500 font-bold">★ {data.doubanRating.toFixed(1)}</dd>
+                        {data.myRating != null && (
+                            <>
+                                <dt class="text-black/40 dark:text-white/40">我的评分</dt>
+                                <dd class="text-orange-500 font-bold">★ {data.myRating.toFixed(1)}</dd>
+                            </>
+                        )}
+                        <dt class="text-black/40 dark:text-white/40">状态</dt>
+                        <dd>
+                            <span class={`text-xs px-2 py-0.5 rounded-full ${isWatched
+                                ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                                : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"}`}>
+                                {isWatched ? "已看" : "想看"}
+                            </span>
+                        </dd>
+                        {data.watchDate && (
+                            <>
+                                <dt class="text-black/40 dark:text-white/40">观影日期</dt>
+                                <dd>{formatDateToYYYYMMDD(data.watchDate)}</dd>
+                            </>
+                        )}
+                        {data.tags.length > 0 && (
+                            <>
+                                <dt class="text-black/40 dark:text-white/40">标签</dt>
+                                <dd>{data.tags.join(" / ")}</dd>
+                            </>
+                        )}
+                    </dl>
+                    <a href={`https://movie.douban.com/subject/${data.doubanId}/`}
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-block mt-4 text-sm text-(--primary) hover:underline">
+                        在豆瓣查看 →
+                    </a>
+                </div>
+            </div>
+
+            <!-- 正文：note.md 里写的观后感 -->
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+    <Comment path={`/movies/${folder}/`} />
+</GridLayout>

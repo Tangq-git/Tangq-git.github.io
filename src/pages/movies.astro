@@ -1,0 +1,124 @@
+---
+export const prerender = true;
+
+import { getCollection } from "astro:content";
+import ImageWrapper from "@components/common/imageWrapper.astro";
+import GridLayout from "@layouts/grid.astro";
+import BackwardButton from "@components/backwardButton.astro";
+
+const pageTitle = "观影记录";
+const pageDescription = "我看过的和想看的电影";
+
+// 构建时读取 movies 集合全部条目（每个 note.md 一条）
+const movieEntries = await getCollection("movies");
+
+// 把 entry 拍平成卡片好用的一维结构
+const movieList = movieEntries
+    .map((entry) => ({
+        // entry.id 形如 "30292777/note"，第一段就是文件夹名（豆瓣 ID），用作详情页路由
+        folder: entry.id.split("/")[0],
+        ...entry.data,
+    }))
+    .sort((a, b) => {
+        // 已看的排前面，各自内部按观影日期新的在前（没日期就当 0 排最后）
+        if (a.status !== b.status) return a.status === "watched" ? -1 : 1;
+        return (b.watchDate?.getTime() ?? 0) - (a.watchDate?.getTime() ?? 0);
+    });
+
+// 顶部统计卡片的数据
+const stats = {
+    total: movieList.length,
+    watched: movieList.filter((m) => m.status === "watched").length,
+    planned: movieList.filter((m) => m.status === "planned").length,
+    // 只统计打过分的，没人打分就显示 "-"
+    avgRating: (() => {
+        const rated = movieList.filter((m) => m.myRating != null);
+        if (rated.length === 0) return "-";
+        return (rated.reduce((sum, m) => sum + m.myRating!, 0) / rated.length).toFixed(1);
+    })(),
+};
+
+// 状态徽章的文案和配色，watched / planned 两种
+function getStatusInfo(status: string) {
+    if (status === "watched") {
+        return {
+            text: "已看",
+            class: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+        };
+    }
+    return {
+        text: "想看",
+        class: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+    };
+}
+---
+
+<GridLayout title={pageTitle} description={pageDescription}>
+    <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full">
+            <BackwardButton currentPath={Astro.url.pathname} />
+
+            <!-- 页面标题 -->
+            <div class="mb-6">
+                <h1 class="text-4xl font-bold text-black/90 dark:text-white/90 mb-2">{pageTitle}</h1>
+                <p class="text-black/75 dark:text-white/75">{pageDescription}</p>
+            </div>
+
+            <!-- 统计卡片 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.total}</div>
+                    <div class="text-sm text-blue-600/70 dark:text-blue-400/70">总数</div>
+                </div>
+                <div class="bg-linear-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-green-600 dark:text-green-400">{stats.watched}</div>
+                    <div class="text-sm text-green-600/70 dark:text-green-400/70">已看</div>
+                </div>
+                <div class="bg-linear-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/20 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-amber-600 dark:text-amber-400">{stats.planned}</div>
+                    <div class="text-sm text-amber-600/70 dark:text-amber-400/70">想看</div>
+                </div>
+                <div class="bg-linear-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-orange-600 dark:text-orange-400">{stats.avgRating}</div>
+                    <div class="text-sm text-orange-600/70 dark:text-orange-400/70">平均评分</div>
+                </div>
+            </div>
+
+            <!-- 海报墙：手机 2 列，屏幕越大列越多 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-5">
+                {movieList.map((movie) => {
+                    const statusInfo = getStatusInfo(movie.status);
+                    return (
+                        <a href={`/movies/${movie.folder}/`}
+                           class="group block rounded-lg overflow-hidden bg-black/5 dark:bg-white/5 hover:shadow-lg transition-shadow">
+                            <!-- 海报容器：2:3 是电影海报标准比例，relative 是为了让徽章能绝对定位 -->
+                            <div class="relative aspect-[2/3]">
+                                <ImageWrapper
+                                    src={movie.poster}
+                                    basePath={`content/movies/${movie.folder}`}
+                                    alt={movie.title}
+                                    class="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                                />
+                                <span class={`absolute top-2 left-2 text-xs px-2 py-0.5 rounded-full ${statusInfo.class}`}>
+                                    {statusInfo.text}
+                                </span>
+                                <span class="absolute top-2 right-2 text-xs px-2 py-0.5 rounded-full bg-black/60 text-white">
+                                    ★ {movie.doubanRating.toFixed(1)}
+                                </span>
+                            </div>
+                            <div class="p-3">
+                                <div class="font-bold text-black/90 dark:text-white/90 truncate">{movie.title}</div>
+                                <div class="text-sm text-black/50 dark:text-white/50">
+                                    {movie.year} · {movie.director}
+                                </div>
+                                {movie.myRating != null && (
+                                    <div class="text-sm text-orange-500">我的评分 ★ {movie.myRating.toFixed(1)}</div>
+                                )}
+                            </div>
+                        </a>
+                    );
+                })}
+            </div>
+        </div>
+    </div>
+</GridLayout>

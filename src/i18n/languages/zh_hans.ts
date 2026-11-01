@@ -71,7 +71,7 @@ export const zh_hans: Translation = {
     [Key.backToHome]: "返回首页",
 
     // 项目展示页面
-    [Key.projects]: "项目展示",
+    [Key.projects]: "项目",
     [Key.projectsSubtitle]: "我的开发项目作品集",
     [Key.projectsAll]: "全部",
     [Key.projectsWeb]: "网页应用",
@@ -96,7 +96,7 @@ export const zh_hans: Translation = {
     [Key.projectsSource]: "源代码",
 
     // 技能展示页面
-    [Key.skills]: "技能展示",
+    [Key.skills]: "技能",
     [Key.skillsSubtitle]: "我的技术技能和专业知识",
     [Key.skillsAI]: "AI 开发",
     [Key.skillsBackend]: "后端开发",
@@ -126,7 +126,7 @@ export const zh_hans: Translation = {
     [Key.skillsByCategory]: "按分类分布",
 
     // 时间线页面
-    [Key.timeline]: "时间线",
+    [Key.timeline]: "历程",
     [Key.timelineSubtitle]: "我的成长历程和重要里程碑",
     [Key.timelineEducation]: "教育经历",
     [Key.timelineWork]: "工作经历",
@@ -173,7 +173,7 @@ export const zh_hans: Translation = {
     [Key.albumsPhotosCount]: "张照片",
 
     // 番剧页面
-    [Key.anime]: "追番",
+    [Key.anime]: "观影",
     [Key.animeTitle]: "我的追番记录",
     [Key.animeSubtitle]: "记录我的二次元之旅",
     [Key.animeList]: "追番列表",
@@ -189,8 +189,18 @@ export const zh_hans: Translation = {
     [Key.animeEmpty]: "暂无追番数据",
     [Key.animeEmptyBangumi]: "请检查 Bangumi 配置或网络连接",
 
+    // 展览页卡片
+    [Key.exhibitionTitle]: "展览",
+    [Key.exhibitionSubtitle]: "我的项目",
+    [Key.exhibitionProjectsDesc]: "我的开发项目作品集",
+    [Key.exhibitionSkillsDesc]: "我的技术栈和专业能力",
+    [Key.exhibitionTimelineDesc]: "我的成长历程和重要里程碑",
+    [Key.exhibitionDiaryDesc]: "随时随地，分享生活",
+    [Key.exhibitionAlbumsDesc]: "记录生活中的美好瞬间",
+    [Key.exhibitionAnimeDesc]: "我看过的电影和番剧",
+
     // 友链页面
-    [Key.friends]: "友链",
+    [Key.friends]: "好友",
 
     // RSS页面
     [Key.rss]: "RSS 订阅",

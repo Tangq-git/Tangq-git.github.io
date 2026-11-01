@@ -186,6 +186,16 @@ enum I18nKey {
     animeEmpty = "animeEmpty",
     animeEmptyBangumi = "animeEmptyBangumi",
 
+    // 展览页卡片
+    exhibitionTitle = "exhibitionTitle",
+    exhibitionSubtitle = "exhibitionSubtitle",
+    exhibitionProjectsDesc = "exhibitionProjectsDesc",
+    exhibitionSkillsDesc = "exhibitionSkillsDesc",
+    exhibitionTimelineDesc = "exhibitionTimelineDesc",
+    exhibitionDiaryDesc = "exhibitionDiaryDesc",
+    exhibitionAlbumsDesc = "exhibitionAlbumsDesc",
+    exhibitionAnimeDesc = "exhibitionAnimeDesc",
+
     // 友链页面
     friends = "friends",
 
