@@ -1,0 +1,21 @@
+{
+    "title": "RAG-AI-Robot",
+    "description": "一款基于 Spring AI 框架构建的智能对话平台，包含通用聊天机器人、智能客服（基于私有知识库）在内的两套 AI 应用",
+    "image": "./Robot.png",
+    "category": "ai",
+    "techStack": [
+        "Spring AI",
+        "Vue",
+        "Tailwind CSS"
+    ],
+    "status": "in-progress",
+    "liveDemo": "",
+    "sourceCode": "https://github.com/Tangq-git/RAG-AI-Robot.git",
+    "startDate": "2026-06-01",
+    "endDate": "",
+    "featured": true,
+    "tags": [
+        "个人项目",
+        "开源项目"
+    ]
+}
