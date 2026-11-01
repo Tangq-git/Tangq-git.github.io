@@ -1,0 +1,19 @@
+{
+    "title": "湖南科技大学 · 计算机科学与技术",
+    "description": "考入湖南科技大学计算机科学与技术专业，正式开始系统的计算机专业学习，从编程基础到数据结构、算法与计算机网络。",
+    "type": "education",
+    "startDate": "2024-09-01",
+    "endDate": "",
+    "organization": "湖南科技大学",
+    "position": "本科生",
+    "skills": [
+        "Java",
+        "数据结构",
+        "算法",
+        "计算机网络"
+    ],
+    "achievements": [],
+    "icon": "material-symbols:school",
+    "color": "#3B82F6",
+    "featured": true
+}
