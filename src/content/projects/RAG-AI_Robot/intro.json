@@ -2,7 +2,7 @@
     "title": "RAG-AI-Robot",
     "description": "一款基于 Spring AI 框架构建的智能对话平台，包含通用聊天机器人、智能客服（基于私有知识库）在内的两套 AI 应用",
     "image": "./Robot.png",
-    "category": "ai",
+    "category": "AI",
     "techStack": [
         "Spring AI",
         "Vue",

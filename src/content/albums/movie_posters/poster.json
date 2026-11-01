@@ -1,0 +1,41 @@
+{
+    "title": "电影海报集",
+    "description": "那些我觉得很好看的电影海报",
+    "cover": "./Green_Book.webp",
+    "date": "2026-11-01T00:00:00.000Z",
+    "location": "湖南 · 湘潭",
+    "tags": [
+        "艺术",
+        "电影"
+    ],
+    "layout": "masonry",
+    "columns": 3,
+    "photos": [
+        {
+            "src": "./A Sun.webp",
+            "alt": "阳光普照海报",
+            "title": "阳光普照",
+            "description": "这张照片背后的故事",
+            "tags": [
+                "家庭"
+            ]
+        },
+        {
+            "src": "./Anatomie d'une chute.webp",
+            "alt": "坠落的审判海报"
+        },
+        {
+            "src": "./Green_Book.webp",
+            "alt": "绿皮书海报"
+        },
+        {
+            "src": "./LaLaLand.webp",
+            "alt": "爱乐之城海报"
+        },
+        {
+            "src": "./Old Fox.webp",
+            "alt": "老狐狸海报"
+        }
+    ],
+    "visible": true
+}
