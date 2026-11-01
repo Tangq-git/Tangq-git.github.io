@@ -1,30 +1,24 @@
 ---
-title: About
+title: 关于我
 ---
 
-# About This Site
+# 关于我
 
-Twilight is a CMS integrated static blog template built with [Astro](https://astro.build) framework.
+你好，我是 Tangq。
 
-::github{repo="Spr-Aachen/Twilight"}
+一个喜欢写代码也热爱生活的人：
 
+- **弹钢琴** —— 音乐是最好的休息
+- **画画** —— 记录眼睛看到的美好
+- **看电影** —— 在别人的故事里过第二种人生，我的观影记录在[这里](/movies/)
 
-## Milestones
+我的梦想是环游世界，和世界各地的人成为朋友。
 
-- Integrated content management system in [#1](https://github.com/Spr-Aachen/Twilight/pull/1)
-- Seamless wallpaper mode switching in [#2](https://github.com/Spr-Aachen/Twilight/pull/2)
-- Dynamic content container response in [#47](https://github.com/Spr-Aachen/Twilight/pull/47)
-- Seamless page component loading in [#48](https://github.com/Spr-Aachen/Twilight/pull/48)
-- Smart music playback handling in [#49](https://github.com/Spr-Aachen/Twilight/pull/49)
-- Infinite-level navigation system in [#50](https://github.com/Spr-Aachen/Twilight/pull/50)
-- Comprehensive statistics dashboard in [#51](https://github.com/Spr-Aachen/Twilight/pull/51)
-- Low-barrier configuration scheme in [#58](https://github.com/Spr-Aachen/Twilight/pull/58)
-- Dynamic breakpoint handling in [#68](https://github.com/Spr-Aachen/Twilight/pull/68)
-- Advanced content management in [#73](https://github.com/Spr-Aachen/Twilight/pull/73)
-- Nested category support in [#74](https://github.com/Spr-Aachen/Twilight/pull/74)
-- Comprehensive music card plugin in [#81](https://github.com/Spr-Aachen/Twilight/pull/81)
-- Refactored DecapCMS OAuth integration in [#107](https://github.com/Spr-Aachen/Twilight/pull/107)
-- Non-breaking PagesCMS support in [#114](https://github.com/Spr-Aachen/Twilight/pull/114)
-- Directory tree view component in [#117](https://github.com/Spr-Aachen/Twilight/pull/117)
-- Enhanced post card cover handler in [#141](https://github.com/Spr-Aachen/Twilight/pull/141)
-- Configurable post copy protection support in [#160](https://github.com/Spr-Aachen/Twilight/pull/160)
+## 关于本站
+
+这里是我的小窝，记录技术、生活，以及一些不想忘记的瞬间。
+
+- 博客基于 [Astro](https://astro.build) + Twilight 主题搭建
+- 文章使用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议，转载请注明出处
+
+欢迎常来坐坐。
